@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="edit-page">    
+    <form method="post">
+        You're about to delete  {{ sport.name }}.
+        
+        <br>
+        This will also delete {{ teams|length }} team(s):
+        <ul>
+        {% for team in teams %}
+            <li>{{ team.name }}</li>
+        {% endfor %}
+        </ul>
+        <b>Are you sure you want to continue?</b>
+    </br>
+    </br>
+        <a id="delete-sport-cancel" href="{{ url_for('show_sports') }}" autofocus>Cancel</a>
+        <script>
+            document.getElementById("delete-sport-cancel").focus();
+        </script>
+        <input id="delete-sport-submit"  type="submit" value="Delete"/>
+    </form>
+</div>
+
+{% endblock %}

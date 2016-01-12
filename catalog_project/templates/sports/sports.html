@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "includes/header.html" %}
+
+{% include "includes/flash-messages.html" %}
+
+<div class="content">
+    
+    {% include "includes/sports-sidebar.html" %}
+
+    <div class="latest-div">
+        <h2>Latest Additions</h2>
+        {% for item in latest_items[:10] %}
+        <p>
+            {{ item.name }} 
+            
+            {% if item.sport_id %}
+
+                {% for sport in sports|selectattr("id", "equalto", item.sport_id) %}
+                    (Team)
+                {% endfor %}
+                
+            {% else %}
+                (Sport)
+            {% endif %}
+
+            ({{ item.created_date|convert_datetime(format='human-short')}})
+
+        </p>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

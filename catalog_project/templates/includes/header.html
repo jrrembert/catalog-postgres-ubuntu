@@ -1,0 +1,14 @@
+<div class="header">
+    
+    <h1 class="header-title"><a href="/">Category App</a></h1>
+    {% if session.picture %}
+        <img src={{ session.picture }}></img>
+    {% endif %}
+
+    {% if not session.username %}
+        <a href={{ url_for("login") }} class="header-login">Login</a>
+    {% else %}
+        <a class="header-login">{{session.username}}</a>
+        <a href={{ url_for("disconnect") }} class="header-logout">Logout</a>
+    {% endif %}
+</div>

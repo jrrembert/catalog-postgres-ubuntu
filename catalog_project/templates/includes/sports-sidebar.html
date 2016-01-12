@@ -1,0 +1,13 @@
+<div class="sidebar-div">
+        <h2>All Sports</h2>
+        
+        {% for sport in sports %}
+        <p>
+            <a href={{ url_for("show_sports_teams", sport_id=sport.id) }}>{{ sport.name }}</a>
+        </p>
+        {% endfor %}
+
+        <span class="add-new">
+            <a href={{ url_for("new_sport") }}>Add a new sport <img src="/static/images/fa-plus-circle.svg"></img></a>
+        </span>
+</div>

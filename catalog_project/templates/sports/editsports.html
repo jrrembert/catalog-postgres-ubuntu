@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="edit-page">    
+    <form method="post">
+        <label for="name">Name: </label>
+        <input id="name" type="text" name="name" value="{{sport.name}}">
+        <br>
+        <input id="submit" type="submit" value="Save"/>
+    </form>
+    <script>
+        document.getElementById("submit").focus();
+    </script>
+</div>
+
+{% endblock %}
+
+
+

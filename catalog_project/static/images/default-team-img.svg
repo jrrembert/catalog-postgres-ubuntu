@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>Mask + Oval 2 + Oval 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="70" cy="70" r="70"></circle>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Mask-+-Oval-2-+-Oval-3" sketch:type="MSLayerGroup">
+            <mask id="mask-2" sketch:name="Mask" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" stroke="#FFFFFF" fill="#C3C2C2" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+            <circle id="Oval-2" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-2)" cx="70" cy="111.232877" r="13.9041096"></circle>
+            <ellipse id="Oval-3" fill="#FFFFFF" sketch:type="MSShapeGroup" mask="url(#mask-2)" cx="70" cy="50.8219178" rx="13.9041096" ry="36.4383562"></ellipse>
+        </g>
+    </g>
+</svg>

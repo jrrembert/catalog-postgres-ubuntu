@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "includes/header.html" %}
+
+{% include "includes/flash-messages.html" %}
+
+<div class="content">
+    
+    {% include "includes/team-sidebar.html" %}
+
+
+    <div class="individual-team-div">
+        <h2>{{ team.name }}</h2>
+        <div class="logo-div">
+            <img class="team-logo" src="{{team.logo}}" onerror="imgError(this);"></img>
+        </div>
+        <ul class="team-info">
+            <li>League: {{ team.league }}</li>
+            <li>Wins: {{ team.wins }}</li>
+            <li>Losses: {{ team.losses }}</li>
+        </ul>
+        <p>
+            <a href={{ url_for("edit_team", sport_id=team.sport_id, team_id=team.id) }}>Edit</a>
+            <a href={{ url_for("delete_team", sport_id=team.sport_id, team_id=team.id) }}>Delete</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

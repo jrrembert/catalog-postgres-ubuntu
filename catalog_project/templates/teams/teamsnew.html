@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "/includes/header.html" %}
+
+<div class="edit-page">    
+    <form method="post">
+        <label for="name">Name: </label>
+        <input id="name" type="text" maxlength="100" name="name">
+        <br>
+        <label for="league">League: </label>
+        <input id="league" type="text" maxlength="40" name="league">
+        <br>
+        <label for="wins">Wins: </label>
+        <input id="wins" type="text" name="wins">
+        <br>
+        <label for="losses">Losses: </label>
+        <input id="losses" type="text" name="losses">
+        <br>
+        <label for="logo">Logo: </label>
+        <input id="logo-web" type="text" name="logo-web">
+        <input id="logo-check" type="radio" name="logo-check" value="web-checked">
+        <br>
+        <label></label>
+        <input id="logo-file" type="file" name="logo-file">
+        <input id="logo-check" type="radio" name="logo-check" value="file-checked">
+        <br>
+        <input id="submit" type="submit" value="Create"/>
+    </form>
+</div>
+
+{% endblock %}

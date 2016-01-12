@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "includes/header.html" %}
+
+{% include "includes/flash-messages.html" %}
+
+<div class="content">
+    
+    {% include "includes/sports-sidebar.html" %}
+
+    <div class="teams-div">
+        
+        <h2>{{ team_sport.name }} Teams</h2>
+        <span>League</span>
+        <span>Wins</span>
+        <span>Losses</span>
+        
+        {% if session.username %}
+        <span class="edit-delete-span">    
+            <a href={{ url_for("edit_sport", sport_id=team_sport.id) }}>Edit</a>
+            <a href={{ url_for("delete_sport", sport_id=team_sport.id) }}>Delete</a>
+        </span>
+        {% endif %}
+                
+        <div>
+            {% for team in teams %}
+                <span class="team-name">
+                <a href={{ url_for('show_team', sport_id=team.sport_id, team_id=team.id) }}>{{ team.name }}</a>
+                </span>
+                <span>{{ team.league }}</span>
+                <span>{{ team.wins }}</span>
+                <span>{{ team.losses }}</span>
+
+                {% if session.username %}
+                <span class="edit-delete-span">
+                    <a href={{ url_for("edit_team", sport_id=team.sport_id, team_id=team.id) }}>Edit</a>
+                    <a href={{ url_for("delete_team", sport_id=team.sport_id, team_id=team.id) }}>Delete</a>
+                </span>
+                {% endif %}
+            {% endfor %}
+
+            <p class="add-new">
+                <a href={{ url_for("new_team", sport_id=team_sport.id) }}>Add a new team <img src="/static/images/fa-plus-circle.svg"></img></a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

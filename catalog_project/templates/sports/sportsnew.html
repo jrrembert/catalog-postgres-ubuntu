@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="edit-page">    
+    <form method="post">
+        <label for="name">Name: </label>
+        <input id="name" type="text" name="name">
+        <br>
+        <input id="submit" type="submit" value="Create"/>
+    </form>
+</div>
+
+{% endblock %}
