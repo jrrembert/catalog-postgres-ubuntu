@@ -17,6 +17,7 @@ import json
 # Define application directory
 import os
 
+
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Enable for development environment
@@ -25,8 +26,18 @@ DEBUG = False
 # Define the database we are working with
 # Note: This path will not play nice with Vagrant synced folders.
 #       Make sure path corresponds to environment where you run your code.
-SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}/app.db'.format(BASE_DIR)
-DATABASE_CONNECT_OPTIONS = {}
+DATABASE_CONNECT_OPTIONS = {
+    'PG_DB_NAME': '',
+    'PG_USERNAME' : '',
+    'PG_PASSWORD': '',
+    'PG_HOST': '',
+}
+SQLALCHEMY_DATABASE_URI = 'postgres://{0}:{1}@{2}/{3}'.format(
+    DATABASE_CONNECT_OPTIONS['PG_USERNAME'],
+    DATABASE_CONNECT_OPTIONS['PG_PASSWORD'],
+    DATABASE_CONNECT_OPTIONS['PG_HOST'],
+    DATABASE_CONNECT_OPTIONS['PG_DB_NAME']
+)
 
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle
