@@ -1,6 +1,6 @@
 # catalog-postgres-ubuntu
 
-Catalog project adapted to utilize Postgres and run off an Ubuntu server. Public IP and Host Name will expire - instructions 
+Catalog project adapted to utilize Postgres and run off an Ubuntu server. Public IP and Host Name are not permanent and will expire. Instructions can be easily adapted to run off a VM.
 
 1. Public IP: [52.11.60.186](http://52.11.60.186)
 2. Host Name: [ec2-52-11-60-186.us-west-2.compute.amazonaws.com](http://ec2-52-11-60-186.us-west-2.compute.amazonaws.com)
