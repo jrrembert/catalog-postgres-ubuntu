@@ -1,15 +1,17 @@
 # catalog-postgres-ubuntu
 
-Catalog project adapted to utilize Postgres and run off an Ubuntu server.
+Catalog project adapted to utilize Postgres and run off an Ubuntu server. Public IP and Host Name will expire - instructions 
 
-1. Public IP: 52.11.60.186
-2. Host Name: ec2-52-10-60-186.us-west-2.compute.amazonaws.com
+1. Public IP: [52.11.60.186](http://52.11.60.186)
+2. Host Name: [ec2-52-11-60-186.us-west-2.compute.amazonaws.com](http://ec2-52-11-60-186.us-west-2.compute.amazonaws.com)
 2. SSH port: 2200
 3. Additional Resources:
 	* [SSHD Configuration](http://linux.die.net/man/5/sshd_config)
 	* [.htaccess files](https://httpd.apache.org/docs/2.4/howto/htaccess.html)
 	* [Troubleshooting psycopg2 installation](http://stackoverflow.com/questions/5420789/how-to-install-psycopg2-with-pip-on-python)
 	* [Running Apache with virtualenv](http://thecodeship.com/deployment/deploy-django-apache-virtualenv-and-mod_wsgi/)
+	* [Udacity project discussion thread](https://discussions.udacity.com/t/p5-how-i-got-through-it/15342/19)
+	* [Monitor logins using fail2ban](https://www.digitalocean.com/community/tutorials/how-to-protect-ssh-with-fail2ban-on-ubuntu-14-04)
 4. Ubuntu packages
 	* ntp
 	* apache2
@@ -137,30 +139,35 @@ $ sudo service apache2 restart
 
 ### 10. Setup Catalog project
 
-```
-# Setup git to clone project
 
+1. Setup git to clone project
+
+	```
 $ sudo apt-get install git
 $ git config --global user.name "YOUR NAME"
 $ git config --global user.email "YOUR EMAIL"
+```
+2. Prepare project folder
 
-# Prepare project folder
-
+	```
 $ sudo mkdir /var/www/catalog && cd /var/www/catalog
+```
+3. Clone GH repo and make web-inaccessible
 
-# Clone GH repo and make web-inaccessible
-
+	```
 $ cd /var/www/
 $ sudo git clone https://github.com/jrrembert/catalog-postgres-ubuntu.git
 $ sudo cp -R catalog-postgres-ubuntu/* catalog/
 $ echo "RedirectMatch 404 /\.git" | sudo tee catalog/.htaccess
+```
+4. Setup project dependencies
 
-# Setup project dependencies
-
+	```
 $ sudo apt-get install python-pip python-dev
+```
+5. Setup virtualenv
 
-# Setup virtualenv
-
+	```
 $ sudo pip install virtualenv
 $ virtualenv /var/www/catalog/venv
 $ sudo chmod -R 777 /var/www/catalog/venv # a bit brutish, could be improved
@@ -292,12 +299,63 @@ DATABASE_CONNECT_OPTIONS = {
 
 
 
-# Setup Google Oauth
+### 13. Setup Google Oauth
 
 1. Go to https://console.developers.google.com and update your javascript origins and redirect URIs
 2. Download your updated client secret file and save it to `/var/www/catalog/client_secrets.json`
 3. Restart Apache server if necessary.
 4. Test site by going to hostname url (not public ip url).
+
+
+# Optional
+
+### 1. Set server to periodically update installed packages
+
+```
+$ sudo apt-get install unattended-upgrades
+```
+
+* Upgrades can cause critical app components to break unexpectedly so we will configure unattended-upgrades to update security patches only.
+
+	1. Open `/etc/apt/apt.conf.d/50unattended-upgrades`.
+	2. Verify that `"${distro_id}:${distro_codename}-security";` is uncommented and other options under `Unattended-Upgrade::Allowed-Origins` are.
+	
+### 2. Setup Fail2Ban to monitor unsuccessful login attempts.
+
+1. Initial installation
+
+	```
+$ sudo apt-get install fail2ban sendmail
+$ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+$ sudo vi /etc/fail2ban/jail.local
+```
+
+2. Change the following:
+	
+	```
+maxretry = 10
+destemail = ADMIN_EMAIL
+action = %(action_mwl)s
+port = SSH PORT
+```
+	
+3. Restart fail2ban
+
+	```
+$ sudo service fail2ban stop
+$ sudo service fail2ban start
+```
+
+### 3. System monitoring
+
+```
+$ sudo apt-get install htop
+$ htop
+``` 
+
+
+
+
 
 
 
